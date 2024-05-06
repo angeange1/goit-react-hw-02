@@ -41,23 +41,16 @@ function App() {
 
   return (
     <>
+      
       <Description />
+      <Options clickHandler={updateFeedback} resetHandler={resetFeedback} totalFeedback={totalFeedback} />
 
-      <Options buttonOption="Good" clickHandler={updateFeedback} feedbackType="good" />
-      <Options buttonOption="Neutral" clickHandler={updateFeedback} feedbackType="neutral" />
-      <Options buttonOption="Bad" clickHandler={updateFeedback} feedbackType="bad" />
-      {totalFeedback > 0 &&
-      <Options buttonOption="Reset" clickHandler={resetFeedback} />}
-
-      {totalFeedback > 0 ? (
-        <>
-      <Feedback feedbackVariant="Good: " feedbackResult={count.good} />      
-      <Feedback feedbackVariant="Neutral: " feedbackResult={count.neutral} />      
-      <Feedback feedbackVariant="Bad: " feedbackResult={count.bad}/>
-      <Feedback feedbackVariant="Total: " feedbackResult={totalFeedback}/>
-      <Feedback feedbackVariant="Positive: " feedbackResult={positiveFeedback + "%"}/>
-          </>
-        ) : <Notification />}
+      {totalFeedback > 0
+        ?
+        <Feedback feedback={count} total={totalFeedback} positive={positiveFeedback + "%"} />
+        :
+        <Notification />}
+      
     </>
   )
 }
